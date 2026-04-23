@@ -1,12 +1,18 @@
 package br.com.cuidar.model;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
+
 
 /**
  * Classe padrão para a criação de pessoas.
  */
 public class Pessoa {
-
+	private final int  IDADE_MIN = 18;
+	private final int  IDADE_MAX = 120;
+	
 	private String cpf;
 	private String nomeCompleto;
 	private Date dataNascimento;
@@ -15,11 +21,9 @@ public class Pessoa {
 
 	public Pessoa(String cpf, String nomeCompleto, Date dataNascimento, String sexo, Boolean ativo) {
 
-		if (validarCpf(cpf) == true || validaNome(nomeCompleto) == true) {
-			this.cpf = cpf;
-			this.nomeCompleto = nomeCompleto;
-		}
-		this.dataNascimento = dataNascimento;
+		this.cpf = setCpf(cpf);
+		this.nomeCompleto = setNomeCompleto(nomeCompleto);
+		this.dataNascimento = setDataNascimento(dataNascimento);
 		this.sexo = sexo;
 		this.ativo = ativo;
 	}
@@ -28,24 +32,33 @@ public class Pessoa {
 		return cpf;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public String setCpf(String cpf) {
+		if (!validarCpf(cpf)) {
+			throw new IllegalArgumentException("CPF inválido: " + cpf);
+		}
+		return cpf;
 	}
 
 	public String getNomeCompleto() {
 		return nomeCompleto;
 	}
 
-	public void setNomeCompleto(String nomeCompleto) {
-		this.nomeCompleto = nomeCompleto;
+	public String setNomeCompleto(String nomeCompleto) {
+		if (!validaNome(nomeCompleto)) {
+			throw new IllegalArgumentException("Nome inválido: " + nomeCompleto);
+		}
+		return nomeCompleto;
 	}
 
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public Date setDataNascimento(Date dataNascimento) {
+		if(!validarDataNascimento(dataNascimento, IDADE_MIN, IDADE_MAX)) {
+			throw new IllegalArgumentException("Data de Nascimento inválido: " + dataNascimento);
+		}
+		return dataNascimento;
 	}
 
 	public String getSexo() {
@@ -62,6 +75,24 @@ public class Pessoa {
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	/**
+	 * Inativa uma pessoa.
+	 */
+	public void inativarPessoa() {
+		if (this.ativo == true) {
+			this.ativo = false;
+		}
+	}
+
+	/**
+	 * Ativa uma pessoa.
+	 */
+	public void ativarPessoa() {
+		if (this.ativo == false) {
+			this.ativo = true;
+		}
 	}
 
 	/**
@@ -135,35 +166,53 @@ public class Pessoa {
 		}
 		for (int i = 0; i < nome.length(); i++) {
 			if (Character.isDigit(nome.charAt(i))) {
-				r = false; // Encontrou um número, retorna true
+				r = false; // Encontrou um número, retorna false
 			}
 		}
 		return r; // Percorreu tudo e não achou números
 	}
+	/**
+	 * Valida se a data de nascimento é valida, se ela for uma data futura ou uma data muito grande(insinuando que a pessoa tenha mais de 120 anos)
+	 * 
+	 * @param data - data recebida para a validação
+	 * @param idadeMin - idade minima definida por uma variavel final
+	 * @param idadeMax - idade maxima definida por uma variavel final
+	 * @return - retorna false caso esteja diferente da regra de negocio. True caso contrario.
+	 */
+	public static boolean validarDataNascimento(Date data, int idadeMin, int idadeMax) {
+		boolean r = true;
+		if (data == null) {
+			r = false;
+		}
+		try {
+			// Converte Date para DataLocal, no formato do sistema, DD-MM-AAAA
+			LocalDate dataNascimento = data.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			
+			LocalDate hoje = LocalDate.now();
+
+			// Não pode ser data futura
+			if (dataNascimento.isAfter(hoje)) {
+				r = false;
+			}
+
+			// Calcula a idade em anos, se for menor que 18, não é possivel cadastro
+			int idade = Period.between(dataNascimento, hoje).getYears();
+			if (idade >= idadeMin && idade <= idadeMax) {
+				r = false;
+			}
+
+		} catch (Exception e) {
+			r = false;
+		}
+		
+		return r;
+	}
 
 	/**
-	 * Edita os dados de uma pessoa 
+	 * Edita os dados de uma pessoa
 	 */
 	public void editarPessoa() {
-		
-	}
 
-	/**
-	 * Inativa uma pessoa.
-	 */
-	public void inativarPessoa() {
-		if (this.ativo == true){
-			this.ativo = false;
-		}
-	}
-
-	/**
-	 * Ativa uma pessoa.
-	 */
-	public void ativarPessoa() {
-		if (this.ativo == false){
-			this.ativo = true;
-		}
 	}
 
 	/**
@@ -172,12 +221,17 @@ public class Pessoa {
 	 * @param cpf - CPF que passado pelo usuario que sera consultado no banco
 	 * @return - todos os dados solicitados atraves do CPF.
 	 */
-	public Residente buscarPorCpf(String cpf) {
-		// TODO: implementar busca por CPF
+	public Pessoa buscarPorCpf(String cpf) {
 		return null;
 	}
 
 	public void visualizarDetalhes() {
-		// TODO: implementar visualização de detalhes
 	}
+
+	@Override
+	public String toString() {
+		return "Pessoa [cpf=" + cpf + ", nomeCompleto=" + nomeCompleto + ", dataNascimento=" + dataNascimento
+				+ ", sexo=" + sexo + ", ativo=" + ativo + "]";
+	}
+	
 }

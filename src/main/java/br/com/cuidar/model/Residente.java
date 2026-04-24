@@ -16,7 +16,7 @@ public class Residente {
 
     public Residente() {
     }
-   
+
     public Residente(
         String nomeCompleto,
         LocalDate dataNascimento,

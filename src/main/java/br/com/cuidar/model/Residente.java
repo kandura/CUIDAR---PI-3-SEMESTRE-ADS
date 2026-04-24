@@ -2,7 +2,9 @@ package br.com.cuidar.model;
 
 import java.time.LocalDate;
 import java.time.Period;
-
+/**
+ * Representa um residente vinculado à ILPI.
+ */
 public class Residente extends Pessoa {
 
 	private LocalDate dataEntradaInstituicao;
@@ -50,7 +52,7 @@ public class Residente extends Pessoa {
 	 */
 	public void visualizarDetalhes() {
 	}
-	/*
+	/**
 	 * Lista os Residente.
 	 */
 	public void listaResidente() {

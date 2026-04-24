@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 /**
- * Classe padrão para a criação de pessoas.
+ * É uma super classe para a criçao de uma nova pessoa.
  */
 public class Pessoa {
 	private final int IDADE_MIN = 18;

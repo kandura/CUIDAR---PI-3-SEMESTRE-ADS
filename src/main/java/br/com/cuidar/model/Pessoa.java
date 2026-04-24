@@ -19,6 +19,10 @@ public class Pessoa {
 	private String sexo;
 	private Boolean ativo;
 
+	public Pessoa() {
+
+	}
+
 	public Pessoa(String cpf, String nomeCompleto, Date dataNascimento, String sexo, Boolean ativo) {
 
 		this.cpf = setCpf(cpf);

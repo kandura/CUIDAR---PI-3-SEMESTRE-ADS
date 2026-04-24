@@ -12,12 +12,10 @@ public class Funcionario extends Pessoa {
     private String login;
     private String senha;
 
-    public Funcionario() {
-    }
 
-    public Funcionario(String cpf, String nomeCompleto, LocalDate dataNascimento, String sexo, boolean ativo,
+    public Funcionario(String cpf, String nomeCompleto, LocalDate dataNascimento, String genero, boolean ativo,
                        Cargo cargo, String login, String senha) {
-        super(cpf, nomeCompleto, dataNascimento, sexo, ativo);
+        super(cpf, nomeCompleto, dataNascimento, genero, ativo);
         this.cargo = cargo;
         this.login = login;
         this.senha = senha;

@@ -12,12 +12,9 @@ public class Medico extends Pessoa {
     private String login;
     private String senha;
 
-    public Medico() {
-    }
-
-    public Medico(String cpf, String nomeCompleto, LocalDate dataNascimento, String sexo, boolean ativo,
+    public Medico(String cpf, String nomeCompleto, LocalDate dataNascimento, String genero, boolean ativo,
                   String crm, String login, String senha) {
-        super(cpf, nomeCompleto, dataNascimento, sexo, ativo);
+        super(cpf, nomeCompleto, dataNascimento, genero, ativo);
         this.crm = crm;
         this.login = login;
         this.senha = senha;

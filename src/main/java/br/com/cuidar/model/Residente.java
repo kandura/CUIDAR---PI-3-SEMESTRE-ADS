@@ -2,14 +2,13 @@ package br.com.cuidar.model;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Date;
 
 public class Residente extends Pessoa {
 
 	private LocalDate dataEntradaInstituicao;
 	private String observacoesGerais;
 
-	public Residente(String cpf, String nomeCompleto, Date dataNascimento, String genero, Boolean ativo,
+	public Residente(String cpf, String nomeCompleto, LocalDate dataNascimento, String genero, Boolean ativo,
 			String observacoesGerais) {
 		super(cpf, nomeCompleto, dataNascimento, genero, ativo);
 		this.dataEntradaInstituicao = setDataEntradaInstituicao();

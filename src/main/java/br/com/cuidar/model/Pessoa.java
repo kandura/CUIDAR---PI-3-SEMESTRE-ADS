@@ -2,8 +2,6 @@ package br.com.cuidar.model;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;
-import java.util.Date;
 
 /**
  * Classe padrão para a criação de pessoas.
@@ -14,11 +12,11 @@ public class Pessoa {
 
 	private String cpf;
 	private String nomeCompleto;
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 	private Boolean ativo;
 	private String genero;
 
-	public Pessoa(String cpf, String nomeCompleto, Date dataNascimento, String genero, Boolean ativo) {
+	public Pessoa(String cpf, String nomeCompleto, LocalDate dataNascimento, String genero, Boolean ativo) {
 
 		this.cpf = setCpf(cpf);
 		this.nomeCompleto = setNomeCompleto(nomeCompleto);
@@ -49,18 +47,18 @@ public class Pessoa {
 		return nomeCompleto;
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public Date setDataNascimento(Date dataNascimento) {
+	public LocalDate setDataNascimento(LocalDate dataNascimento) {
 		if (!validarDataNascimento(dataNascimento, IDADE_MIN, IDADE_MAX)) {
 			throw new IllegalArgumentException("Data de Nascimento inválido: " + dataNascimento);
 		}
 		return dataNascimento;
 	}
 
-	public Boolean getAtivo() {
+	public Boolean isAtivo() {
 		return ativo;
 	}
 
@@ -201,24 +199,19 @@ public class Pessoa {
 	 * @return - retorna false caso esteja diferente da regra de negocio. True caso
 	 *         contrario.
 	 */
-	public static boolean validarDataNascimento(Date data, int idadeMin, int idadeMax) {
+	public static boolean validarDataNascimento(LocalDate data, int idadeMin, int idadeMax) {
 		boolean r = true;
 		if (data == null) {
 			r = false;
 		}
 		try {
-			// Converte Date para DataLocal, no formato do sistema, DD-MM-AAAA
-			LocalDate dataNascimento = data.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-			LocalDate hoje = LocalDate.now();
-
 			// Não pode ser data futura
-			if (dataNascimento.isAfter(hoje)) {
+			if (data.isAfter(LocalDate.now())) {
 				r = false;
 			}
 
 			// Calcula a idade em anos, se for menor que 18, não é possivel cadastro
-			int idade = Period.between(dataNascimento, hoje).getYears();
+			int idade = Period.between(data, LocalDate.now()).getYears();
 			if (idade >= idadeMin && idade <= idadeMax) {
 				r = false;
 			}

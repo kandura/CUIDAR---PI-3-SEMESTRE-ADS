@@ -5,26 +5,25 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
 
-
 /**
  * Classe padrão para a criação de pessoas.
  */
 public class Pessoa {
-	private final int  IDADE_MIN = 18;
-	private final int  IDADE_MAX = 120;
-	
+	private final int IDADE_MIN = 18;
+	private final int IDADE_MAX = 120;
+
 	private String cpf;
 	private String nomeCompleto;
 	private Date dataNascimento;
-	private String sexo;
 	private Boolean ativo;
+	private String genero;
 
-	public Pessoa(String cpf, String nomeCompleto, Date dataNascimento, String sexo, Boolean ativo) {
+	public Pessoa(String cpf, String nomeCompleto, Date dataNascimento, String genero, Boolean ativo) {
 
 		this.cpf = setCpf(cpf);
 		this.nomeCompleto = setNomeCompleto(nomeCompleto);
 		this.dataNascimento = setDataNascimento(dataNascimento);
-		this.sexo = sexo;
+		this.genero = setGenero(genero);
 		this.ativo = ativo;
 	}
 
@@ -55,18 +54,10 @@ public class Pessoa {
 	}
 
 	public Date setDataNascimento(Date dataNascimento) {
-		if(!validarDataNascimento(dataNascimento, IDADE_MIN, IDADE_MAX)) {
+		if (!validarDataNascimento(dataNascimento, IDADE_MIN, IDADE_MAX)) {
 			throw new IllegalArgumentException("Data de Nascimento inválido: " + dataNascimento);
 		}
 		return dataNascimento;
-	}
-
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
 	}
 
 	public Boolean getAtivo() {
@@ -93,6 +84,34 @@ public class Pessoa {
 		if (this.ativo == false) {
 			this.ativo = true;
 		}
+	}
+
+	/**
+	 * Valida o genero, se está de acordo com o definido no enum, para não gerar
+	 * generos inexistentes.
+	 * 
+	 * @param genero - paramentro passado com o genero escolhido
+	 * @return retorna true caso o genero esteja dentro dos aceitos pelo enum
+	 */
+	public static Boolean validarGenero(String genero) {
+		boolean r = false;
+		for (Genero g : Genero.values()) {
+			if (g.name().equalsIgnoreCase(genero)) {
+				r = true;
+			}
+		}
+		return r;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public String setGenero(String genero) {
+		if (!validarGenero(genero)) {
+			throw new IllegalArgumentException("Genero inválido: " + dataNascimento);
+		}
+		return genero;
 	}
 
 	/**
@@ -171,13 +190,16 @@ public class Pessoa {
 		}
 		return r; // Percorreu tudo e não achou números
 	}
+
 	/**
-	 * Valida se a data de nascimento é valida, se ela for uma data futura ou uma data muito grande(insinuando que a pessoa tenha mais de 120 anos)
+	 * Valida se a data de nascimento é valida, se ela for uma data futura ou uma
+	 * data muito grande(insinuando que a pessoa tenha mais de 120 anos)
 	 * 
-	 * @param data - data recebida para a validação
+	 * @param data     - data recebida para a validação
 	 * @param idadeMin - idade minima definida por uma variavel final
 	 * @param idadeMax - idade maxima definida por uma variavel final
-	 * @return - retorna false caso esteja diferente da regra de negocio. True caso contrario.
+	 * @return - retorna false caso esteja diferente da regra de negocio. True caso
+	 *         contrario.
 	 */
 	public static boolean validarDataNascimento(Date data, int idadeMin, int idadeMax) {
 		boolean r = true;
@@ -187,7 +209,7 @@ public class Pessoa {
 		try {
 			// Converte Date para DataLocal, no formato do sistema, DD-MM-AAAA
 			LocalDate dataNascimento = data.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			
+
 			LocalDate hoje = LocalDate.now();
 
 			// Não pode ser data futura
@@ -204,7 +226,7 @@ public class Pessoa {
 		} catch (Exception e) {
 			r = false;
 		}
-		
+
 		return r;
 	}
 
@@ -219,7 +241,7 @@ public class Pessoa {
 	 * Consulta um CPF no banco de dados.
 	 * 
 	 * @param cpf - CPF que passado pelo usuario que sera consultado no banco
-	 * @return - todos os dados solicitados atraves do CPF.
+	 * @return - todos os dados atraves do CPF.
 	 */
 	public Pessoa buscarPorCpf(String cpf) {
 		return null;
@@ -231,7 +253,7 @@ public class Pessoa {
 	@Override
 	public String toString() {
 		return "Pessoa [cpf=" + cpf + ", nomeCompleto=" + nomeCompleto + ", dataNascimento=" + dataNascimento
-				+ ", sexo=" + sexo + ", ativo=" + ativo + "]";
+				+ ", genero=" + genero + ", ativo=" + ativo + "]";
 	}
-	
+
 }

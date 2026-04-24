@@ -12,14 +12,16 @@ public class Funcionario extends Pessoa{
 
     private  String login;
     private  String senha;
+    private Cargo cargo;
 
 
     public Funcionario(String cpf, String nomeCompleto, Date dataNascimento, String sexo, Boolean ativo,
-    String login, String senha){
+    String login, String senha, Cargo cargo){
 
         super(cpf, nomeCompleto ,dataNascimento, sexo, ativo);
         this.login= login;
         this.senha = senha;
+        this.cargo = cargo;
     }
 
     public  String getLogin(){
@@ -57,6 +59,22 @@ public class Funcionario extends Pessoa{
 
         return this.login.equalsIgnoreCase(login) && this.senha.equals(senha);
     }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
+
+    /**
+     * Lista os funcionarios, exibe os dados
+     */
+    public void listarFuncionario() {
+        System.out.println(this.toString());
+    }
+
 
 
     @Override

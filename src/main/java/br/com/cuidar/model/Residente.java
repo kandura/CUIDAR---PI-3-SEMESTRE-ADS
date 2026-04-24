@@ -56,4 +56,11 @@ public class Residente extends Pessoa {
 	 */
 	public void listaResidente() {
 	}
+
+	@Override
+	public String toString() {
+		return "Residente [dataEntradaInstituicao=" + dataEntradaInstituicao + ", observacoesGerais="
+				+ observacoesGerais + "]";
+	}
+	
 }

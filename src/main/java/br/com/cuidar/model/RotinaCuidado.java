@@ -2,6 +2,10 @@ package br.com.cuidar.model;
 
 import java.time.LocalDate;
 
+/**
+ * Representa a rotina diária de cuidados de um {@link Residente}.
+ * Registra alimentação, banho, higiene e observações gerais.
+ */
 public class RotinaCuidado {
 
     private int id;
@@ -9,31 +13,23 @@ public class RotinaCuidado {
     private String alimentacao;
     private String banho;
     private String higiene;
-    private String observacoes;
+    private String observacoesGerais;
 
-    // RELACIONAMENTOS 
+    // RELACIONAMENTO 1:1 com Residente
     private Residente residente;
-    private Funcionario funcionario;
 
     public RotinaCuidado() {
     }
 
-    public RotinaCuidado(
-            LocalDate dataRegistro,
-            String alimentacao,
-            String banho,
-            String higiene,
-            String observacoes,
-            Residente residente,
-            Funcionario funcionario) {
-
+    public RotinaCuidado(int id, LocalDate dataRegistro, String alimentacao, String banho,
+                         String higiene, String observacoesGerais, Residente residente) {
+        this.id = id;
         this.dataRegistro = dataRegistro;
         this.alimentacao = alimentacao;
         this.banho = banho;
         this.higiene = higiene;
-        this.observacoes = observacoes;
+        this.observacoesGerais = observacoesGerais;
         this.residente = residente;
-        this.funcionario = funcionario;
     }
 
     // GETTERS E SETTERS
@@ -78,12 +74,12 @@ public class RotinaCuidado {
         this.higiene = higiene;
     }
 
-    public String getObservacoes() {
-        return observacoes;
+    public String getObservacoesGerais() {
+        return observacoesGerais;
     }
 
-    public void setObservacoes(String observacoes) {
-        this.observacoes = observacoes;
+    public void setObservacoesGerais(String observacoesGerais) {
+        this.observacoesGerais = observacoesGerais;
     }
 
     public Residente getResidente() {
@@ -94,30 +90,42 @@ public class RotinaCuidado {
         this.residente = residente;
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
+    // MÉTODOS
 
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
-    }
-
-
+    /**
+     * Registra uma nova rotina de cuidados para o residente.
+     */
     public void registrarRotina() {
-        System.out.println("Rotina registrada para o residente: " + residente.getNomeCompleto());
     }
 
+    /**
+     * Edita os dados de uma rotina de cuidados existente.
+     */
     public void editarRotina() {
-        System.out.println("Rotina editada com sucesso!");
     }
 
+    /**
+     * Visualiza as rotinas de cuidados registradas para o residente.
+     */
     public void visualizarRotinas() {
-        System.out.println("=== Rotina de Cuidado ===");
-        System.out.println("Data: " + dataRegistro);
-        System.out.println("Alimentação: " + alimentacao);
-        System.out.println("Banho: " + banho);
-        System.out.println("Higiene: " + higiene);
-        System.out.println("Observações: " + observacoes);
+    }
+
+    /**
+     * Consulta e lista as rotinas de cuidados cadastradas.
+     */
+    public void consultas() {
+    }
+
+    /**
+     * Verifica se todos os cuidados obrigatórios da rotina foram preenchidos,
+     * ou seja, se alimentação, banho e higiene possuem valores válidos.
+     *
+     * @return - true se a rotina estiver completa, false caso contrário
+     */
+    public boolean isCompleta() {
+        return alimentacao != null && !alimentacao.isEmpty()
+                && banho != null && !banho.isEmpty()
+                && higiene != null && !higiene.isEmpty();
     }
 
     @Override

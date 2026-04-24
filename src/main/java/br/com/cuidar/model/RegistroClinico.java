@@ -1,6 +1,7 @@
 package br.com.cuidar.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Representa um registro clínico na evolução de saúde de um {@link Residente}.
@@ -86,11 +87,6 @@ public class RegistroClinico {
         this.intercorrencia = intercorrencia;
     }
 
-    /**
-     * Retorna o residente associado a este registro.
-     *
-     * @return o {@link Residente} associado
-     */
     public Residente getResidente() {
         return residente;
     }
@@ -99,11 +95,6 @@ public class RegistroClinico {
         this.residente = residente;
     }
 
-    /**
-     * Retorna o médico responsável por este registro.
-     *
-     * @return o {@link Medico} responsável
-     */
     public Medico getMedico() {
         return medico;
     }
@@ -115,9 +106,34 @@ public class RegistroClinico {
     // MÉTODOS
 
     /**
-     * Verifica se houve intercorrência neste registro clínico.
+     * Adiciona um novo registro clínico ao histórico do residente.
+     */
+    public void adicionarRegistro() {
+    }
+
+    /**
+     * Visualiza o histórico completo de registros clínicos do residente.
+     */
+    public void visualizarHistorico() {
+    }
+
+    /**
+     * Lista os registros clínicos dentro de um período específico,
+     * filtrando pela data de início e data de fim.
      *
-     * @return {@code true} se houver intercorrência registrada, {@code false} caso contrário
+     * @param inicio - data de início do período de consulta
+     * @param fim    - data de fim do período de consulta
+     * @return - lista de registros clínicos encontrados no período
+     */
+    public List<RegistroClinico> listarPorPeriodo(LocalDate inicio, LocalDate fim) {
+        return null;
+    }
+
+    /**
+     * Verifica se houve intercorrência neste registro clínico, ou seja,
+     * se há alguma intercorrência descrita no campo.
+     *
+     * @return - true se houver intercorrência registrada, false caso contrário
      */
     public boolean isIntercorrencia() {
         return intercorrencia != null && !intercorrencia.isEmpty();

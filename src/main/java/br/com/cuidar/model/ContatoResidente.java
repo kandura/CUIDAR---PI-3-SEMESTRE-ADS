@@ -67,7 +67,7 @@ public class ContatoResidente {
     public String getEmail() {
         return email;
     }
-   
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -80,25 +80,39 @@ public class ContatoResidente {
         this.observacoes = observacoes;
     }
 
-    /**
-     * Retorna o residente vinculado a este contato.
-     *
-     * @return o {@link Residente} associado
-     */
     public Residente getResidente() {
         return residente;
     }
 
-    /**
-     * Define o residente vinculado a este contato.
-     *
-     * @param residente o {@link Residente} a ser associado
-     */
     public void setResidente(Residente residente) {
         this.residente = residente;
     }
 
-    // MÉTODOS — lógica de CRUD será implementada na camada Service
+    // MÉTODOS
+
+    /**
+     * Cadastra um novo contato vinculado a um residente.
+     */
+    public void cadastrarContato() {
+    }
+
+    /**
+     * Atualiza os dados de um contato existente.
+     */
+    public void atualizarContato() {
+    }
+
+    /**
+     * Exclui o contato do residente.
+     */
+    public void excluiContato() {
+    }
+
+    /**
+     * Consulta e lista os contatos de um residente.
+     */
+    public void consultass() {
+    }
 
     @Override
     public String toString() {

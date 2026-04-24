@@ -83,20 +83,10 @@ public class Prontuario {
         this.dataCriacao = dataCriacao;
     }
 
-    /**
-     * Retorna o residente dono deste prontuário.
-     *
-     * @return o {@link Residente} associado
-     */
     public Residente getResidente() {
         return residente;
     }
 
-    /**
-     * Define o residente dono deste prontuário.
-     *
-     * @param residente o {@link Residente} a ser associado
-     */
     public void setResidente(Residente residente) {
         this.residente = residente;
     }
@@ -104,18 +94,43 @@ public class Prontuario {
     // MÉTODOS
 
     /**
-     * Verifica se o residente possui alguma alergia registrada.
+     * Cria um novo prontuário para o residente.
+     */
+    public void criarProntuario() {
+    }
+
+    /**
+     * Atualiza as informações fixas do prontuário, como doenças crônicas,
+     * alergias e condições médicas relevantes.
+     */
+    public void atualizarInformacoesFixas() {
+    }
+
+    /**
+     * Visualiza os dados completos do prontuário do residente.
+     */
+    public void visualizarProntuario() {
+    }
+
+    /**
+     * Consulta e lista os prontuários cadastrados.
+     */
+    public void consultass() {
+    }
+
+    /**
+     * Verifica se o residente possui alguma alergia registrada no prontuário.
      *
-     * @return {@code true} se houver alergias cadastradas, {@code false} caso contrário
+     * @return - true se houver alergias cadastradas, false caso contrário
      */
     public boolean possuiAlergia() {
         return alergias != null && !alergias.isEmpty();
     }
 
     /**
-     * Verifica se o residente possui doenças crônicas registradas.
+     * Verifica se o residente possui doenças crônicas registradas no prontuário.
      *
-     * @return {@code true} se houver doenças crônicas cadastradas, {@code false} caso contrário
+     * @return - true se houver doenças crônicas cadastradas, false caso contrário
      */
     public boolean possuiDoencasCronicas() {
         return doencas != null && !doencas.isEmpty();

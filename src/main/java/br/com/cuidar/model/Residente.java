@@ -1,121 +1,65 @@
 package br.com.cuidar.model;
 
 import java.time.LocalDate;
+import java.time.Period;
 
-public class Residente {
+public class Residente extends Pessoa {
 
-    private int id;
-    private String nomeCompleto;
-    private LocalDate dataNascimento;
-    private String cpf;
-    private Genero genero;
-    private String telefone;
-    private LocalDate dataEntradaInstituicao;
-    private String observacoesGerais;
-    private boolean ativo;
+	private LocalDate dataEntradaInstituicao;
+	private String observacoesGerais;
 
-    public Residente() {
-    }
+	public Residente(String cpf, String nomeCompleto, LocalDate dataNascimento, String genero, Boolean ativo,
+			String observacoesGerais) {
+		super(cpf, nomeCompleto, dataNascimento, genero, ativo);
+		this.dataEntradaInstituicao = setDataEntradaInstituicao();
+		this.observacoesGerais = observacoesGerais;
+	}
 
-    public Residente(
-        String nomeCompleto,
-        LocalDate dataNascimento,
-        String cpf,
-        Genero genero,
-        String telefone,
-        LocalDate dataEntradaInstituicao,
-        String observacoesGerais,
-        boolean ativo) {
+	public LocalDate getDataEntradaInstituicao() {
+		return dataEntradaInstituicao;
+	}
 
-        this.nomeCompleto = nomeCompleto;
-        this.dataNascimento = dataNascimento;
-        this.cpf = cpf;
-        this.genero = genero;
-        this.telefone = telefone;
-        this.dataEntradaInstituicao = dataEntradaInstituicao;
-        this.observacoesGerais = observacoesGerais;
-        this.ativo = ativo;
-    }
+	public LocalDate setDataEntradaInstituicao() {
+		return LocalDate.now();
+	}
 
-    public int getId() {
-        return id;
-    }
+	public String getObservacoesGerais() {
+		return observacoesGerais;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setObservacoesGerais(String observacoesGerais) {
+		this.observacoesGerais = observacoesGerais;
+	}
+	/**
+	 * Calcula há quanto tempo o residente está na instituição
+	 * 
+	 * @param dataEntradaInstituicao - Data de entrada do residente na instituição
+	 * @return - Valor em anos de quantos anos ele está na instituição
+	 */
+	public int consultaTempoResidente(LocalDate dataEntradaInstituicao) {
+		int idade = Period.between(dataEntradaInstituicao, LocalDate.now()).getYears();
+		return idade;
+	}
+	/**
+	 * Edita os dados de um Residente
+	 */
+	public void editarResidente() {
+	}
+	/**
+	 * Visualiza os dados de um Residente
+	 */
+	public void visualizarDetalhes() {
+	}
+	/*
+	 * Lista os Residente.
+	 */
+	public void listaResidente() {
+	}
 
-    public String getNomeCompleto() {
-        return nomeCompleto;
-    }
-
-    public void setNomeCompleto(String nomeCompleto) {
-        this.nomeCompleto = nomeCompleto;
-    }
-
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public Genero getGenero() {
-        return genero;
-    }
-
-    public void setGenero(Genero genero) {
-        this.genero = genero;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public LocalDate getDataEntradaInstituicao() {
-        return dataEntradaInstituicao;
-    }
-
-    public void setDataEntradaInstituicao(LocalDate dataEntradaInstituicao) {
-        this.dataEntradaInstituicao = dataEntradaInstituicao;
-    }
-
-    public String getObservacoesGerais() {
-        return observacoesGerais;
-    }
-
-    public void setObservacoesGerais(String observacoesGerais) {
-        this.observacoesGerais = observacoesGerais;
-    }
-
-    public boolean isAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
-
-    @Override
-    public String toString() {
-        return "Residente{" +
-                "id=" + id +
-                ", nomeCompleto='" + nomeCompleto + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", ativo=" + ativo +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Residente [dataEntradaInstituicao=" + dataEntradaInstituicao + ", observacoesGerais="
+				+ observacoesGerais + "]";
+	}
+	
 }

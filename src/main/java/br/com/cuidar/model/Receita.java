@@ -76,20 +76,10 @@ public class Receita {
         this.horarios = horarios;
     }
 
-    /**
-     * Verifica se o medicamento está ativo.
-     *
-     * @return {@code true} se o medicamento estiver ativo, {@code false} caso contrário
-     */
     public boolean isAtivo() {
         return ativo;
     }
 
-    /**
-     * Define o status de atividade do medicamento.
-     *
-     * @param ativo {@code true} para ativar, {@code false} para desativar
-     */
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
@@ -102,11 +92,6 @@ public class Receita {
         this.observacoes = observacoes;
     }
 
-    /**
-     * Retorna o residente que recebe este medicamento.
-     *
-     * @return o {@link Residente} associado
-     */
     public Residente getResidente() {
         return residente;
     }
@@ -115,11 +100,6 @@ public class Receita {
         this.residente = residente;
     }
 
-    /**
-     * Retorna o médico que prescreveu este medicamento.
-     *
-     * @return o {@link Medico} que prescreveu
-     */
     public Medico getMedico() {
         return medico;
     }
@@ -131,17 +111,35 @@ public class Receita {
     // MÉTODOS
 
     /**
-     * Desativa o medicamento (suspensão).
+     * Cadastra um novo medicamento na receita do residente.
+     */
+    public void cadastrarMedicamento() {
+    }
+
+    /**
+     * Atualiza os dados de um medicamento existente na receita.
+     */
+    public void atualizarMedicamento() {
+    }
+
+    /**
+     * Desativa o medicamento, indicando que ele foi suspenso.
      */
     public void desativarMedicamento() {
         this.ativo = false;
     }
 
     /**
-     * Reativa o medicamento.
+     * Reativa o medicamento que havia sido suspenso.
      */
     public void ativarMedicamento() {
         this.ativo = true;
+    }
+
+    /**
+     * Visualiza os medicamentos ativos do residente.
+     */
+    public void visualizarMedicamentosAtivos() {
     }
 
     @Override
